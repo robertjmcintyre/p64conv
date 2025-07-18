@@ -85,6 +85,11 @@ int txt2p64(string infile, string outfile)
    {
       printf("Write failed!\n");
    }
+
+   P64MemoryStreamDestroy(&P64MemoryStreamInstance);
+   P64ImageDestroy(&P64Image);
+   
+   return 0;
 }
 
 int p642txt(string infile, string outfile)
@@ -167,7 +172,14 @@ int p642txt(string infile, string outfile)
       {
          printf("Read failed!\n");
       }
+
+      free(buffer);
    }
+
+   P64MemoryStreamDestroy(&P64MemoryStreamInstance);
+   P64ImageDestroy(&P64Image);
+   
+   return 0;
 }
 
 int main(int argc, char ** argv)

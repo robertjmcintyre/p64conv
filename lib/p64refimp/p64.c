@@ -217,6 +217,7 @@ void P64MemoryStreamCreate(PP64MemoryStream Instance) {
 void P64MemoryStreamDestroy(PP64MemoryStream Instance) {
 	if(Instance->Data) {
 		p64_free(Instance->Data);
+		Instance->Data = NULL;
 	}
 	memset(Instance, 0, sizeof(TP64MemoryStream));
 }
@@ -224,8 +225,11 @@ void P64MemoryStreamDestroy(PP64MemoryStream Instance) {
 void P64MemoryStreamClear(PP64MemoryStream Instance) {
 	if(Instance->Data) {
 		p64_free(Instance->Data);
+		Instance->Data = NULL;
 	}
-	memset(Instance, 0, sizeof(TP64MemoryStream));
+	Instance->Size = 0;
+	Instance->Position = 0;
+	Instance->Allocated = 0;
 }
 
 p64_uint32_t P64MemoryStreamSeek(PP64MemoryStream Instance, p64_uint32_t Position) {
